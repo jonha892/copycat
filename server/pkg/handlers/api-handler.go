@@ -35,13 +35,24 @@ func (handler *APIHandler) GetSpotlights(c echo.Context) error {
 func (handler *APIHandler) GetSingleBlob(c echo.Context) error {
 
 	id := c.Param("id")
-	data, err := (*handler.loader).LoadSingle(id)
+	data, err := (*handler.loader).LoadSingleBlob(id)
 	if err != nil {
 		(*handler.logger).Error("Error loading single blob", zap.Any("error", err))
 		return c.String(500, "Internal Server Error")
 	}
 
 	return c.JSON(200, data)
+}
+
+func (handler *APIHandler) GetSingleGif(c echo.Context) error {
+	id := c.Param("id")
+	data, err := (*handler.loader).LoadSingleGif(id)
+	if err != nil {
+		(*handler.logger).Error("Error loading single gif", zap.Any("error", err))
+		return c.String(500, "Internal Server Error")
+	}
+
+	return c.Blob(200, "image/jpeg", data)
 }
 
 func (handler *APIHandler) Search(c echo.Context) error {

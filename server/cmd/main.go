@@ -20,6 +20,7 @@ func main() {
 
 	e.GET("/api/spotlights", apiHandler.GetSpotlights)
 	e.GET("/api/blobs/:id", apiHandler.GetSingleBlob)
+	e.GET("/api/gifs/:id", apiHandler.GetSingleGif)
 	e.GET("/api/search", apiHandler.Search)
 
 	e.Logger.Fatal(e.Start(":1234"))
